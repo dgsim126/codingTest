@@ -11,9 +11,11 @@ def solution(s):
                 if s[j-1] == s[i]:
                     answer.append(n)
                     break
-            if n == i:
-                answer.append(-1)
+                if n == i and s[0] != s[i]:
+                    answer.append(-1)
+                if n == i and s[0] == s[i]:
+                    answer.append(n)
     return answer
 
 # # 테스트
-# print(solution("oooana"))
+print(solution("oaabaro"))
