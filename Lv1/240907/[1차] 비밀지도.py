@@ -1,5 +1,4 @@
 # 테스트 케이스 3번 실패(87.5%)
-# 입출력 예제 출력의 4번째 len이 4라 앞에 공백이면 제거하는 코드 작성했지만 실패(뭐가 문제인지 모르겠음)
 
 def solution(n, arr1, arr2):
     sol1 = toTwo(arr1, n)
@@ -22,15 +21,14 @@ def solution(n, arr1, arr2):
 def toTwo(arr, n):
     result = [[0 for i in range(n)] for j in range(n)]  # 2차원 배열 만들기
 
-    for i in range(len(arr)):  # 입력받은 값을 하나씩 꺼냄
-        flag = n - 1
-        while (arr[i] >= 2):
-            result[i][flag] = arr[i] % 2
-            arr[i] //= 2
-            flag -= 1
-        result[i][flag] = 1
+    for i in range(len(arr)):
+        binary = bin(arr[i])[2:]  # 2진수 변환
+        binary = binary.zfill(n)  # n 자리에 맞춰서 앞에 0 채우기
 
-    return result
+        for j in range(n):
+            result[i][j] = int(binary[j])  # 각 자리를 배열에 넣기
+
+    print(result)
 
 
 ## main ##
