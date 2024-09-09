@@ -2,6 +2,7 @@ def solution(lotto, win_num):
     check= [0]*46
     correct= 0
     possible= 0
+    possible_row= 0
 
     for num in win_num:
         check[num]+=2
@@ -28,6 +29,6 @@ def solution(lotto, win_num):
     return [rankList[correct], rankList[first_correct]]
 
 ## main ##
-lottos= [45, 4, 35, 20, 3, 9]
-win_nums= [20, 9, 3, 45, 4, 35]
+lottos= [44, 1, 0, 0, 31, 25] # [44, 0, 0, 31]
+win_nums= [31, 10, 45, 1, 6, 19]
 print(solution(lottos, win_nums))
