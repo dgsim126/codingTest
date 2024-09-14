@@ -11,3 +11,19 @@ def solution(players, callings):
         players.insert(index-1, callings[i])
     answer = players
     return answer
+
+def solution(players, callings):
+    player_indices = {player: i for i, player in enumerate(players)}
+
+    for calling in callings:
+        current_index = player_indices[calling]
+
+        if current_index > 0:
+
+            previous_player = players[current_index - 1]
+            players[current_index - 1], players[current_index] = players[current_index], players[current_index - 1]
+
+            player_indices[calling] -= 1
+            player_indices[previous_player] += 1
+
+    return players
