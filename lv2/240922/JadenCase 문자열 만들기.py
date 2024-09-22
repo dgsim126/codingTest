@@ -1,14 +1,19 @@
 def solution(s):
     answer = ''
-    arr = s.lower().split()
-    print(arr)
-    for i in arr:
-        i = i[0].upper()
-    print(arr)
+    s = s.lower()
+    answer += s[0].upper()
+    for i in range(1, len(s)):
+        if s[i-1] == " ":
+            if s[i] != " ":
+                answer += s[i].upper()
+            else:
+                answer += s[i]
+                continue
+        else:
+            answer += s[i]
     return answer
 
 # 테스트
 
-solution("3people unFollowed me")
-
-s = "super"
+print(solution("3people unFollowed me"))
+print(solution("for the last week"))
