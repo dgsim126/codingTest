@@ -1,46 +1,41 @@
-# dfs로 모든 경우를 순회
-# dfs의 결과 [1, 3, 0, 2]와 같이 중복되는 수가 없고, 바로 옆에 있는 숫자가 1차이가 아닌 모든 경우가 정답
-
 def solution(n):
     global cnt
-    cnt= 0
+    cnt = 0
 
-    is_used= [0]*n
-    result= [-1]*n
+    result = [-1] * n  # 각 행에 퀸이 놓인 열의 위치를 저장하는 배열
 
-    dfs(0, is_used, result, n)
+    dfs(0, result, n)
 
     return cnt
 
 
-def dfs(depth, is_used, result, n):
+def dfs(depth, result, n):
     global cnt
 
-    # 탈출 조건
-    if(depth==n):
-        cnt+=1
-        return cnt
+    # 탈출 조건: 모든 퀸이 배치되면 카운트를 증가시킴
+    if depth == n:
+        cnt += 1
+        return
 
     for i in range(n):
-        if(is_used[i]==0):
-            if(depth==0):
-                is_used[i]= 1
-                result[depth]= i
+        if is_safe(depth, i, result):
+            result[depth] = i  # 현재 행(depth)의 퀸을 i번째 열에 놓음
+            dfs(depth + 1, result, n)  # 다음 행으로 이동
+            result[depth] = -1  # 백트래킹, 퀸을 다른 위치에 놓기 위해 초기화
 
-                dfs(depth+1, is_used, result, n)
 
-                is_used[i]= 0
-                result[depth] = -1
-            else:
-                if(abs(i-result[depth-1])==1):
-                    is_used[i]= 1
-                    result[depth]= i
+def is_safe(depth, col, result):
+    # 현재 (depth, col)에 퀸을 놓을 수 있는지 확인
+    for i in range(depth):
+        # 같은 열에 퀸이 있는지 확인 (세로 공격)
+        if result[i] == col:
+            return False
+        # 대각선 공격 방지 (행 차이와 열 차이가 같으면 대각선 상에 있음)
+        if abs(result[i] - col) == abs(i - depth):
+            return False
+    return True
 
-                    dfs(depth+1, is_used, result, n)
-
-                    is_used[i]= 0
-                    result[depth]= -1
 
 ## main ##
-n= 4
+n = 4
 print(solution(n))
