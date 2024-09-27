@@ -1,9 +1,9 @@
 def solution(str1, str2):
     answer = 0
     str1 = str1.upper()
-    str1_list = []
+    str1_list = []  # str1이 가질 수 있는 집합원소
     str2 = str2.upper()
-    str2_list = []
+    str2_list = []  # str2가 가질 수 있는 집합원소
     dic = {
         "A" : 1,
         "B" : 2,
@@ -31,9 +31,9 @@ def solution(str1, str2):
         "X" : 2,
         "Y" : 1,
         "Z" : 2
-    }
+    }   # 알파벳일 경우만 원소를 이룸
     
-    for i in range(len(str1)-1):
+    for i in range(len(str1)-1):    # str1ist, str2list 정의
         if str1[i] not in dic or str1[i+1] not in dic:
             continue
         else:
@@ -44,7 +44,7 @@ def solution(str1, str2):
         else:
             str2_list.append(str2[i]+str2[i+1])
     
-    if str2_list == [] and str1_list == []:
+    if str2_list == [] and str1_list == []: # 둘다 공집합이면 ~
         return 65536
     
     dic2 = {}
