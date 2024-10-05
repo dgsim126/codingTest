@@ -1,3 +1,4 @@
+# 시간 초과
 def solution(scoville, K):
     count = 0
 
