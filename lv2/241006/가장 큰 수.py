@@ -1,4 +1,5 @@
 # gpt
+# 시간초과
 def solution(numbers):
     numbers = list(map(str, numbers))
     
