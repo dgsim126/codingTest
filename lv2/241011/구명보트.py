@@ -14,16 +14,34 @@
 #         answer += 1
 #     return answer
 
+# def solution(people, limit):
+#     answer = 0
+#     while people:
+#         answer += 1
+#         boat_with = people.pop(0)
+#         for i in range(len(people)):
+#             if people[i] + boat_with <= limit:
+#                 people.pop(i)
+#                 break
+#     return answer
+
+# GPT
+
 def solution(people, limit):
-    answer = 0
-    while people:
-        answer += 1
-        boat_with = people.pop(0)
-        for i in range(len(people)):
-            if people[i] + boat_with <= limit:
-                people.pop(i)
-                break
-    return answer
+    people.sort()
+    left = 0
+    right = len(people) - 1
+    boats = 0
+
+    while left <= right:
+        if people[left] + people[right] <= limit:
+            left += 1
+        right -= 1
+        boats += 1
+
+    return boats
+
+print(solution([70, 50, 80, 50], 100))
 
 print(solution([70,50,80,50], 100))
 # print(solution([70,80,50], 100))
